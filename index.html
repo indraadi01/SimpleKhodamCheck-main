@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cek Khodam Online - indz</title>
+  <!-- Include Boxicons CSS -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      /* AliceBlue */
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      gap: 200px;
+    }
+
+    main {
+      position: relative;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h2 {
+      color: #007acc;
+      /* Blue */
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #005f99;
+      /* Darker Blue */
+    }
+
+    input[type="text"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border: 1px solid #007acc;
+      /* Blue */
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007acc;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    h4 {
+      color: #005f99;
+      /* Darker Blue */
+      margin-top: 20px;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #007acc;
+    }
+
+    footer {
+      background-color: #ffffff;
+      padding: 3px 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-links a {
+      font-size: 16px;
+      display: inline-block;
+      background: #394047;
+      color: #fff;
+      line-height: 1;
+      padding: 10px 0;
+      margin-right: 4px;
+      border-radius: 4px;
+      text-align: center;
+      width: 36px;
+      height: 36px;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      background: #428bca;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 0px 20px;
+      }
+
+      main,
+      footer {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h2>CEK KHODAM ONLINE</h2>
+    <label for="inputNama">Masukkan Nama Disini :</label>
+    <input id="inputNama" type="text" />
+    <button onclick="cekKhodam()">Submit</button>
+    <h4>Khodamnya Adalah :</h4>
+    <div id="result"></div>
+  </main>
+  <footer>
+    <p>&copy; 2024 All Rights Reserved - indraadi</p>
+    <div class="footer-animation">
+      <div class="social-links mt-3">
+        <a href="https://www.instagram.com/kangsomaay_?igsh=Y2dyeno4YzRueHdt" class="instagram"><i
+            class="bx bxl-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/mindraadikusuma" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const khodamList = [
+      "Putu",
+      "Macan Tutul",
+      "Kalomang",
+      "Kalong Prematur",
+      "Undur-undur",
+      "Udang Rebus",
+      "Burung Gagak",
+      "Kepala Ikan",
+      "Ular Berkepala Dua",
+      "Nyai Roro Kidul",
+      "Prabu Siliwangi",
+      "Sari Murni",
+      "Nutrisari",
+      "Semut Rangrang",
+      "Katak Bizher",
+      "Kunti Bogel",
+      "Kaki Seribu",
+      "Ular Berkaki Tiga",
+      "Burhan",
+      "Sapiderman",
+      "Avengers",
+      "One Pis",
+      "Cicak",
+      "Rawa Rontek",
+      "Doctor Strangers",
+      "Dino",
+      "Sikuyuu",
+      "Mangga Manis",
+      "Pasukan Bubur Ayam",
+      "Ratu Pantai Selatan",
+      "Om Jin",
+      "Barongsai Kecil",
+      "Kupu-Kupu Malam",
+      "Tuyul Kaya",
+      "Pohon Rindang",
+      "Pantai Sepi",
+      "Gelombang Laut",
+      "Topeng Monyet",
+      "Lautan Hitam",
+      "Merpati Putih",
+      "Kuda Laut",
+      "Putri Duyung",
+      "Hantu Beringin",
+      "Putri Malu",
+      "Tanduk Rusa",
+      "Kucing Parsi",
+      "Bayangan Hitam",
+      "Air Terjun",
+      "Gemuruh Petir",
+      "Awan Mendung",
+      "Batu Keramat",
+      "Angin Kencang",
+      "Bunga Mawar",
+      "Sapi Buntung",
+      "Harimau Sumatra",
+      "Rajawali Emas",
+      "Bebek Peking",
+      "Bunga Melati",
+      "Kumbang Hijau",
+      "Burung Hantu",
+      "Kerbau Hitam",
+      "Kelinci Bulan",
+      "Kura-Kura Laut",
+      "Tikus Tanah",
+      "Ular Piton",
+      "Ikan Pari",
+      "Hiu Putih",
+      "Laba-Laba",
+      "Serigala Malam",
+      "Tupai Terbang",
+      "Elang Perkasa",
+      "Kelelawar",
+      "Kumbang Emas",
+      "Gajah Terbang",
+      "Bunga Sakura",
+      "Katak Pohon",
+      "Landak Laut",
+      "Kupu-Kupu Emas",
+      "Burung Elang",
+      "Ikan Hiu",
+      "Harimau Malaya",
+      "Putri Cina",
+      "Putri Jawa",
+      "Raja Hitam",
+      "Ratu Emas",
+      "Batu Besar",
+      "Hujan Gerimis",
+      "Badai Laut",
+      "Singa Laut",
+      "Bintang Laut",
+      "Ayam Jago",
+      "Kuda Pacu",
+      "Burung Pipit",
+      "Ikan Koi",
+      "Elang Jawa",
+      "Hiu Hitam",
+      "Kucing Hitam",
+      "Burung Cenderawasih",
+      "Tikus Hutan",
+      "Buaya Darat",
+      "Penjaga Gunung",
+      "Penunggu Rimba",
+      "Hantu Laut",
+      "Putri Angin",
+      "Raja Ular",
+      "Burung Kasuari",
+      "Ikan Paus",
+      "Bunga Anggrek",
+      "Bunga Kenanga",
+      "Pohon Beringin",
+      "Rumput Liar",
+      "Embun Pagi",
+      "Hujan Deras",
+      "Awan Hitam",
+      "Gelap Gulita",
+      "Kilatan Petir",
+      "Kupu-Kupu Malam",
+      "Langit Biru",
+      "Matahari Terbenam",
+      "Air Laut",
+      "Ombak Laut",
+      "Pasir Pantai",
+      "Burung Dara",
+      "Raja Rimba",
+      "Putri Hutan",
+      "Putri Pantai",
+      "Putri Salju",
+      "Harimau Belang",
+      "Singa Putih",
+      "Kuda Zebra",
+      "Gajah Afrika",
+      "Ikan Paus Biru",
+      "Tikus Got",
+      "Hutan Belantara",
+      "Bunga Matahari",
+      "Petir Menyambar",
+      "Awan Gelap",
+      "Embun Fajar",
+      "Bintang Kejora",
+      "Matahari Pagi",
+      "Angin Topan",
+      "Hujan Badai",
+      "Gelombang Tinggi",
+      "Pasir Putih",
+      "Kapal Tenggelam",
+      "Burung Walet",
+      "Elang Laut",
+      "Putri Bulan",
+      "Putri Bintang",
+      "Putri Surya",
+      "Putri Angkasa",
+      "Ratu Malam",
+      "Raja Siang",
+      "Pangeran Malam",
+      "Putri Pelangi",
+      "Putri Awan",
+      "Kupu-Kupu Merah",
+      "Ikan Arwana",
+      "Hantu Pohon",
+      "Burung Kakatua",
+      "Hiu Karang",
+      "Ikan Tuna",
+      "Burung Nuri",
+      "Kucing Persia",
+      "Rusa Bawean",
+      "Merak Hijau",
+      "Katak Pohon",
+      "Laba-Laba Merah",
+      "Kura-Kura Hijau",
+      "Ikan Gurame",
+      "Ular Hijau",
+      "Burung Merpati",
+      "Kucing Kampung",
+      "Hiu Tikus",
+      "Kerang Hijau",
+      "Gajah Putih",
+      "Sapi Perah",
+      "Kuda Nil",
+      "Tupai Merah",
+      "Bajing Hitam",
+      "Burung Beo",
+      "Ikan Bandeng",
+      "Tenggiri Laut",
+      "Teripang Laut",
+      "Ubur-Ubur Laut",
+      "Penyu Hijau",
+      "Putri Tujuh",
+      "Putri Seribu",
+      "Raja Laut",
+      "Raja Darat",
+      "Raja Langit",
+      "Raja Hutan",
+      "Raja Rimba",
+      "Putri Cemara",
+      "Putri Kelapa",
+      "Putri Rumbia",
+      "Putri Sawit",
+      "Putri Nipah",
+      "Putri Rotan",
+      "Putri Pandan",
+      "Putri Bambu",
+      "Putri Jeruk",
+      "Putri Melon",
+      "Putri Semangka"
+    ];
+
+
+    // Fungsi untuk mendapatkan elemen acak dari array
+    function getRandomElement(array) {
+      const randomIndex = Math.floor(Math.random() * array.length);
+      return array[randomIndex];
+    }
+
+    // Variabel untuk melacak status submit
+    let submitted = false;
+
+    // Fungsi untuk memproses submit
+    function cekKhodam() {
+      const namaInput = document.getElementById("inputNama");
+      const nama = namaInput.value.trim();
+
+      // Jika belum pernah submit sebelumnya dan nama tidak kosong
+      if (!submitted && nama !== "") {
+        const hasil = getRandomElement(khodamList);
+        document.getElementById("result").innerText = hasil;
+        submitted = true; // Set status submit menjadi true setelah submit pertama
+
+        // Biarkan nilai input tetap ada setelah submit
+        // namaInput.value = ""; // Mengosongkan input nama
+        setTimeout(() => {
+          document.getElementById("result").innerText = "";
+          submitted = false; // Mengatur ulang status submit setelah waktu tertentu
+        }, 500000); // Hapus hasil setelah 500000 milidetik...
+      } else if (nama === "") {
+        document.getElementById("result").innerText = "Masukkan nama terlebih dahulu!";
+      }
+      // Jika sudah pernah submit sebelumnya, tidak melakukan apa-apa
+    }
+  </script>
+</body>
+
+</html>
