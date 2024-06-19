@@ -363,28 +363,31 @@
     // Variabel untuk melacak status submit
     let submitted = false;
 
-    // Fungsi untuk memproses submit
-    function cekKhodam() {
-      const namaInput = document.getElementById("inputNama");
-      const nama = namaInput.value.trim();
+// Fungsi untuk memproses submit
+function cekKhodam() {
+  const namaInput = document.getElementById("inputNama");
+  const nama = namaInput.value.trim();
 
-      // Jika belum pernah submit sebelumnya dan nama tidak kosong
-      if (!submitted && nama !== "") {
-        const hasil = getRandomElement(khodamList);
-        document.getElementById("result").innerText = hasil;
-        submitted = true; // Set status submit menjadi true setelah submit pertama
+  // Jika nama tidak kosong
+  if (nama !== "") {
+    // Jika belum pernah submit sebelumnya atau nama yang berbeda
+    if (!submitted || submitted && nama !== submitted) {
+      const hasil = getRandomElement(khodamList);
+      document.getElementById("result").innerText = hasil;
+      submitted = nama; // Set submitted menjadi nama yang baru dimasukkan
 
-        // Biarkan nilai input tetap ada setelah submit
-        // namaInput.value = ""; // Mengosongkan input nama
-        setTimeout(() => {
-          document.getElementById("result").innerText = "";
-          submitted = false; // Mengatur ulang status submit setelah waktu tertentu
-        }, 500000); // Hapus hasil setelah 500000 milidetik...
-      } else if (nama === "") {
-        document.getElementById("result").innerText = "Masukkan nama terlebih dahulu!";
-      }
-      // Jika sudah pernah submit sebelumnya, tidak melakukan apa-apa
+      // Hapus hasil setelah beberapa detik
+      setTimeout(() => {
+        document.getElementById("result").innerText = "";
+        submitted = false; // Set submitted kembali ke false setelah waktu tertentu
+      }, 500000); // Hapus hasil setelah 500000 milidetik..
     }
+  } else {
+    // Jika nama kosong, tampilkan pesan
+    document.getElementById("result").innerText = "Masukkan nama terlebih dahulu!";
+  }
+}
+
   </script>
 </body>
 
