@@ -1,4 +1,4 @@
-# cekKhodam
+# SimpleKhodamCheck
 Website hiburan untuk melakukan permainan cek khodam yang dibuat berbasis HTML, CSS dan JS sederhana.
 <br>
 Silahkan masukkan nama dan klik tombol 'Submit' untuk melihat hasil.
